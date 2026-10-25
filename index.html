@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC Prod Art | Production audiovisuelle & création média</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        fxYellow: '#FFC700',
+                        brand: {
+                            accent: 'var(--color-accent, #3b82f6)',
+                            'accent-glow': 'var(--color-accent-glow, rgba(59, 130, 246, 0.35))',
+                            bg: 'var(--color-bg, #0A0A0C)',
+                            card: 'var(--color-card, #141418)',
+                            surface: 'var(--color-surface, #1C1C22)',
+                            border: 'var(--color-border, #282830)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['var(--font-primary, "Inter")', 'sans-serif'],
+                        heading: ['var(--font-heading, "Syne")', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --color-accent: #e8b44f;
+            --color-accent-glow: rgba(232, 180, 79, 0.24);
+            --color-bg: #0A0A0C;
+            --color-card: #141418;
+            --color-surface: #1C1C22;
+            --color-border: #282830;
+            --font-primary: 'Inter';
+            --font-heading: 'Syne';
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: #F3F4F6;
+            font-family: var(--font-primary), sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-heading {
+            font-family: var(--font-heading), sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #26262c;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+
+        /* Ambient Glow & Effects */
+        .accent-glow {
+            box-shadow: 0 0 25px var(--color-accent-glow);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px var(--color-accent-glow);
+        }
+        .glass-panel {
+            background: rgba(20, 20, 24, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .video-card-hover:hover .video-overlay {
+            opacity: 1;
+        }
+        .video-card-hover:hover img {
+            transform: scale(1.05);
+        }
+        .poster-card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Custom Input Color Styling */
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 6px;
+        }
+
+        /* FX-inspired editorial direction, expressed through RC Prod Art's own palette. */
+        :root { --color-accent: #e8b44f; --color-accent-glow: rgba(232, 180, 79, .24); }
+        .text-blue-400, .text-blue-500 { color: var(--color-accent) !important; }
+        .bg-blue-600 { background-color: var(--color-accent) !important; color: #111 !important; }
+        .hover\:bg-blue-500:hover { background-color: #f3c96f !important; color: #111 !important; }
+        .border-blue-500, .hover\:border-blue-500:hover { border-color: var(--color-accent) !important; }
+        .focus\:border-blue-500:focus { border-color: var(--color-accent) !important; }
+        .shadow-blue-600\/30, .shadow-blue-900\/30 { --tw-shadow-color: rgba(232, 180, 79, .18) !important; }
+        ::selection { background: var(--color-accent); color: #111; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        }
+    </style>
+</head>
+<body class="selection:bg-blue-600 selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="nav-logo shrink-0">
+                <a href="index.html">
+                    <img src="logo.png" alt="RC Prod Art Logo" class="w-20 h-20 object-contain">
+                </a>
+            </div>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-8 font-medium text-sm text-gray-300">
+                <a href="index.html" class="text-fxYellow font-bold border-b-2 border-fxYellow">Accueil</a>
+                <a href="realisation.html" class="hover:text-white transition-colors">Réalisations</a>
+                <a href="portfolio.html" class="hover:text-white transition-colors">Portfolio</a>
+                <a href="packages.html" class="hover:text-white transition-colors">Packages</a>
+                <a href="studio.html" class="hover:text-white transition-colors">Studio</a>
+                <a href="rc-lab.html" class="hover:text-white transition-colors">RC LAB</a>
+                <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-gray-400 hover:text-white">
+                <i class="fa-solid fa-bars text-xl" id="mobileMenuIcon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden lg:hidden border-b border-white/10 bg-black/95 px-6 py-6 space-y-4">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block text-lg text-fxYellow font-bold border-b-2 border-fxYellow">Accueil</a>
+            <a href="realisation.html" onclick="toggleMobileMenu()" class="block text-lg font-medium text-gray-300">Réalisations</a>
+            <a href="portfolio.html" onclick="toggleMobileMenu()" class="block text-lg font-medium text-gray-300">Portfolio</a>
+            <a href="packages.html" onclick="toggleMobileMenu()" class="block text-lg font-medium text-gray-300">Packages</a>
+            <a href="studio.html" onclick="toggleMobileMenu()" class="block text-lg font-medium text-gray-300">Studio</a>
+            <a href="rc-lab.html" onclick="toggleMobileMenu()" class="block text-lg font-medium text-gray-300">RC LAB</a>
+            <a href="contact.html" onclick="toggleMobileMenu()" class="block text-lg font-medium text-gray-300">Contact</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="flex-grow pt-20">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="relative min-h-[92vh] flex items-end overflow-hidden border-b border-white/10">
+            <div class="absolute inset-0 z-0 bg-black">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-bg via-black/45 to-black/20 z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/20 z-10"></div>
+                <img id="heroBgImage" src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1920&q=80" alt="Équipe de production audiovisuelle sur un plateau" class="w-full h-full object-cover opacity-55">
+            </div>
+            <div class="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-36 pb-20 sm:pb-24 space-y-7">
+                <div class="inline-flex items-center gap-3 text-[10px] sm:text-xs font-semibold tracking-[.22em] uppercase text-white/80">
+                    <span class="w-8 h-px bg-brand-accent"></span> RC PROD ART <span class="text-white/35">—</span> TUNIS, TUNISIE
+                </div>
+                <h1 class="max-w-5xl text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black font-heading tracking-[-.045em] text-white uppercase leading-[.88]">
+                    L’image qui<br><span class="text-brand-accent">marque.</span>
+                </h1>
+                <p class="max-w-xl text-base sm:text-lg text-white/75 font-normal leading-relaxed">
+                    Production audiovisuelle, photographie et création digitale. Des idées fortes, une réalisation précise, une image qui reste.
+                </p>
+                <div class="flex flex-wrap items-center gap-3 pt-1">
+                    <a href="#videos" class="px-7 py-4 font-bold text-xs tracking-[.14em] uppercase bg-brand-accent hover:bg-amber-300 text-black transition-all">
+                        Voir nos réalisations <i class="fa-solid fa-arrow-right ml-3"></i>
+                    </a>
+                    <a href="contact.html" class="px-7 py-4 font-semibold text-xs tracking-[.14em] uppercase text-white border border-white/35 hover:border-brand-accent hover:text-brand-accent transition-all">
+                        Parlons de votre projet
+                    </a>
+                </div>
+            </div>
+            <div class="absolute bottom-7 right-8 z-20 hidden sm:flex items-center gap-3 text-[10px] tracking-[.18em] uppercase text-white/60"><span class="w-10 h-px bg-white/40"></span> Production · Image · Création</div>
+        </section>
+
+        <!-- RC STUDIO INTRO -->
+        <section id="studio-intro" class="py-20 sm:py-28 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
+                <div class="lg:col-span-5">
+                    <span class="text-[10px] font-bold uppercase tracking-[.22em] text-brand-accent">Le studio RC Prod Art</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-4 leading-[1.05]">Une vision créative.<br><span class="text-white/45">Une image juste.</span></h2>
+                </div>
+                <div class="lg:col-span-6 lg:col-start-7 space-y-6">
+                    <p class="text-white/65 text-base sm:text-lg leading-relaxed">Basé à Tunis, RC Prod Art accompagne les marques et les créateurs dans la production audiovisuelle, la photographie et la création de contenus digitaux.</p>
+                    <p class="text-white/50 text-sm leading-relaxed">De l’idée à la post-production, nous réunissons direction artistique, savoir-faire technique et sens du récit pour donner à chaque projet une identité visuelle forte.</p>
+                    <a href="#about" class="inline-flex items-center gap-3 text-xs font-bold tracking-[.15em] uppercase text-brand-accent hover:text-white transition-colors">Découvrir le studio <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="py-20 sm:py-24 bg-[#101010] border-y border-white/10">
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">
+                    <div><span class="text-[10px] font-bold uppercase tracking-[.22em] text-brand-accent">Ce que nous faisons</span><h2 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-3">Des idées à l’image.</h2></div>
+                    <p class="text-white/55 text-sm max-w-md leading-relaxed">Une équipe créative pour imaginer, produire et finaliser des contenus audiovisuels adaptés à votre marque et à votre public.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px mt-8 bg-white/10 border border-white/10">
+                    <article class="bg-[#101010] p-6 sm:p-7 min-h-48"><span class="text-xs text-brand-accent font-mono">01</span><h3 class="text-lg font-bold text-white mt-8">Production vidéo</h3><p class="text-sm text-white/50 mt-3 leading-relaxed">Films de marque, publicité, clips et contenus pour les réseaux sociaux.</p></article>
+                    <article class="bg-[#101010] p-6 sm:p-7 min-h-48"><span class="text-xs text-brand-accent font-mono">02</span><h3 class="text-lg font-bold text-white mt-8">Photographie</h3><p class="text-sm text-white/50 mt-3 leading-relaxed">Images de campagne, portraits et photographie de produit.</p></article>
+                    <article class="bg-[#101010] p-6 sm:p-7 min-h-48"><span class="text-xs text-brand-accent font-mono">03</span><h3 class="text-lg font-bold text-white mt-8">Création digitale</h3><p class="text-sm text-white/50 mt-3 leading-relaxed">Visuels et contenus pensés pour les plateformes et les campagnes digitales.</p></article>
+                    <article class="bg-[#101010] p-6 sm:p-7 min-h-48"><span class="text-xs text-brand-accent font-mono">04</span><h3 class="text-lg font-bold text-white mt-8">Post-production</h3><p class="text-sm text-white/50 mt-3 leading-relaxed">Montage, étalonnage et finitions visuelles au service de votre histoire.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SHOWCASE -->
+        <section id="videos" class="py-24 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 space-y-12">
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-[.22em] text-brand-accent">Sélection</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-2">Nos réalisations</h2>
+                </div>
+
+                <!-- Video Filter Tabs -->
+                <div class="flex flex-wrap gap-2" id="videoFilterContainer">
+                    <button onclick="filterVideos('all')" class="v-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white transition-all" data-category="all">Tout</button>
+                    <button onclick="filterVideos('Commercial')" class="v-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all border border-white/10" data-category="Commercial">Publicité</button>
+                    <button onclick="filterVideos('Music Video')" class="v-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all border border-white/10" data-category="Music Video">Clips</button>
+                    <button onclick="filterVideos('Short Film')" class="v-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all border border-white/10" data-category="Short Film">Films</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Video Grid -->
+            <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Rendered dynamically by JavaScript -->
+            </div>
+        </section>
+
+        <!-- POSTERS & VISUALS SECTION (AFFICHES) -->
+        <section id="posters" class="py-24 bg-black/40 border-t border-b border-white/5 transition-all">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-[.22em] text-brand-accent">Image & direction artistique</span>
+                        <h2 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-2">Photographie & visuels</h2>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-md">
+                        Photographie, direction artistique et création visuelle : des images conçues pour raconter une histoire et donner une identité à chaque projet.
+                    </p>
+                </div>
+
+                <!-- Posters Grid -->
+                <div id="posterGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Rendered dynamically by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT / STUDIO PHILOSOPHY -->
+        <section id="about" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-[10px] font-bold uppercase tracking-[.22em] text-brand-accent">À propos du studio</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold font-heading text-white leading-tight">
+                        La création audiovisuelle, de l’idée à l’image finale.
+                    </h2>
+                    <p class="text-gray-400 text-base leading-relaxed">
+                        RC Prod Art est un studio de production audiovisuelle basé à Tunis. Nous imaginons et réalisons des films, des photographies et des contenus digitaux pour les marques et les créateurs.
+                    </p>
+                    <p class="text-gray-400 text-base leading-relaxed">
+                        Notre approche réunit direction créative, préparation de production et post-production, avec une attention particulière portée au récit, au détail et à la cohérence de chaque image.
+                    </p>
+
+                    <a href="contact.html" class="inline-flex items-center gap-3 pt-2 text-xs font-bold tracking-[.15em] uppercase text-brand-accent hover:text-white transition-colors">Travaillons ensemble <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="relative min-h-[320px] lg:min-h-[440px] overflow-hidden bg-[#141414] border border-white/10 p-8 sm:p-10 flex flex-col justify-between">
+                    <span class="text-[10px] uppercase tracking-[.22em] text-white/40">Notre approche</span>
+                    <div class="space-y-5">
+                        <p class="text-4xl sm:text-6xl font-black font-heading uppercase leading-[.9] text-white">Imaginer.<br><span class="text-brand-accent">Réaliser.</span><br>Marquer.</p>
+                        <p class="max-w-xs text-sm text-white/50 leading-relaxed">Un accompagnement créatif et technique, adapté à l’ambition de chaque projet.</p>
+                    </div>
+                    <span class="self-end text-[10px] font-mono tracking-[.2em] text-white/35">RC — TUNIS</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT & BOOKING SECTION -->
+        <section id="contact" class="py-24 bg-black/60 border-t border-white/10 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <!-- Contact Info -->
+                    <div class="lg:col-span-5 space-y-8">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-[.22em] text-brand-accent">Parlons de votre projet</span>
+                            <h2 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-2">Créons ensemble.</h2>
+                        </div>
+
+                        <p class="text-gray-400 leading-relaxed">
+                            Vous préparez un film, une campagne ou un contenu de marque ? Contactez le studio pour discuter de votre projet.
+                        </p>
+
+                        <div class="space-y-6 pt-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs uppercase font-bold text-gray-400">Studio</p>
+                                    <p class="text-white font-medium">Mutuelle Ville, Tunis, Tunisie</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs uppercase font-bold text-gray-400">E-mail</p>
+                                    <a href="mailto:rcprodartcontact@gmail.com" class="text-white font-medium hover:text-brand-accent transition-colors">rcprodartcontact@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs uppercase font-bold text-gray-400">Téléphone / WhatsApp</p>
+                                    <a href="tel:+21624090366" class="text-white font-medium hover:text-brand-accent transition-colors">+216 24 090 366</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Form -->
+                    <div class="lg:col-span-7 glass-panel p-8 sm:p-10 rounded-3xl border border-white/10">
+                        <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs uppercase font-bold text-gray-300 mb-2">Votre nom</label>
+                                    <input type="text" required placeholder="Nom et prénom" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs uppercase font-bold text-gray-300 mb-2">Adresse e-mail</label>
+                                    <input type="email" required placeholder="vous@entreprise.com" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs uppercase font-bold text-gray-300 mb-2">Type de projet</label>
+                                    <select class="w-full px-4 py-3 rounded-xl bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500 transition-colors">
+                                        <option value="Commercial">Publicité / Film de marque</option>
+                                        <option value="Music Video">Clip musical</option>
+                                        <option value="Short Film">Film / Documentaire</option>
+                                        <option value="Photography">Photographie</option>
+                                        <option value="Digital Content">Contenu digital</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs uppercase font-bold text-gray-300 mb-2">Budget indicatif (facultatif)</label>
+                                    <input type="text" placeholder="À préciser si connu" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-gray-300 mb-2">Parlez-nous de votre projet</label>
+                                <textarea rows="4" required placeholder="Votre idée, vos délais, vos besoins…" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 bg-brand-accent hover:opacity-95 text-black font-bold tracking-wider uppercase text-xs transition-all">
+                                Envoyer ma demande
+                            </button>
+
+                            <div id="contactNotice" class="hidden p-4 rounded-xl bg-green-500/20 border border-green-500/40 text-green-300 text-xs text-center font-medium">
+                                Votre logiciel de messagerie va s’ouvrir avec votre demande préremplie.
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-black py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-gray-500">
+            <p>&copy; 2026 RC Prod Art. Tous droits réservés.</p>
+            <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                <a href="tel:+21624090366" class="text-white/60 hover:text-brand-accent transition-colors">+216 24 090 366</a>
+                <a href="mailto:rcprodartcontact@gmail.com" class="text-white/60 hover:text-brand-accent transition-colors">rcprodartcontact@gmail.com</a>
+                <span class="text-white/60">Mutuelle Ville, Tunis, Tunisie</span>
+                <a href="https://www.facebook.com/profile.php?id=61594969591297" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-brand-accent transition-colors">Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- VIDEO PLAYER MODAL -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4">
+        <button onclick="closeVideoModal()" class="absolute top-6 right-6 p-3 text-gray-400 hover:text-white text-2xl transition-all hover:scale-110">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="w-full max-w-5xl space-y-4">
+            <div class="relative pt-[56.25%] bg-black rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                <iframe id="modalIframe" class="absolute inset-0 w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left">
+                <div>
+                    <h3 id="modalTitle" class="text-2xl font-bold font-heading text-white">Project Title</h3>
+                    <p id="modalMeta" class="text-xs text-blue-400 font-semibold uppercase tracking-wider">Category • Client</p>
+                </div>
+                <span id="modalYear" class="px-3 py-1 rounded-full bg-white/10 text-xs font-mono text-gray-300 self-start sm:self-auto">2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- POSTER LIGHTBOX MODAL -->
+    <div id="posterModal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4" onclick="closePosterModal()">
+        <button onclick="closePosterModal()" class="absolute top-6 right-6 p-3 text-gray-400 hover:text-white text-2xl transition-all hover:scale-110">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-3xl max-h-[90vh] flex flex-col items-center gap-4" onclick="event.stopPropagation()">
+            <img id="posterModalImg" src="" alt="Poster Lightbox" class="max-h-[80vh] w-auto rounded-xl object-contain border border-white/10 shadow-2xl">
+            <h4 id="posterModalTitle" class="text-lg font-bold font-heading text-white text-center">Poster Title</h4>
+        </div>
+    </div>
+
+    <!-- ADMIN SURFACE (FULL CONTROL PANEL MODAL) -->
+    <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-end">
+        <div class="w-full max-w-2xl h-full bg-brand-card border-l border-white/10 shadow-2xl flex flex-col overflow-hidden">
+            
+            <!-- Admin Header -->
+            <div class="p-6 border-b border-white/10 flex items-center justify-between bg-black/40">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-lg font-bold">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold font-heading text-white">RC Studio Admin Surface</h3>
+                        <p class="text-xs text-gray-400">Live Customization & Data Management</p>
+                    </div>
+                </div>
+                <button onclick="toggleAdminModal()" class="p-2 text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Admin Authentication Shield -->
+            <div id="adminAuthShield" class="p-8 flex flex-col items-center justify-center my-auto space-y-6 text-center">
+                <div class="w-16 h-16 rounded-2xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-white">Administrator Verification</h4>
+                    <p class="text-xs text-gray-400 mt-1">Enter passcode to unlock live site controls (Default: admin123)</p>
+                </div>
+                <div class="w-full max-w-xs space-y-3">
+                    <input type="password" id="adminPassInput" placeholder="Passcode" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-center tracking-widest text-lg focus:outline-none focus:border-blue-500">
+                    <button onclick="unlockAdmin()" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all">
+                        Unlock Surface
+                    </button>
+                    <p id="adminAuthError" class="hidden text-xs text-red-400 font-medium">Incorrect Passcode!</p>
+                </div>
+            </div>
+
+            <!-- Admin Controls Panel (Unlocked) -->
+            <div id="adminControls" class="hidden flex-grow flex flex-col overflow-hidden">
+                
+                <!-- Admin Tabs -->
+                <div class="flex border-b border-white/10 bg-black/20 px-6">
+                    <button onclick="switchAdminTab('content')" class="admin-tab-btn active px-4 py-3 text-xs font-bold uppercase tracking-wider border-b-2 border-blue-500 text-white">Content CRUD</button>
+                    <button onclick="switchAdminTab('branding')" class="admin-tab-btn px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-white">Branding & Styles</button>
+                    <button onclick="switchAdminTab('layout')" class="admin-tab-btn px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-white">Layout Toggles</button>
+                </div>
+
+                <!-- Tab 1: Content CRUD -->
+                <div id="adminTabContent" class="admin-tab-pane p-6 overflow-y-auto space-y-8 flex-grow">
+                    
+                    <!-- Add New Video Form -->
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-blue-400 flex items-center gap-2">
+                            <i class="fa-solid fa-video"></i> Add New Video Project
+                        </h4>
+                        <form onsubmit="handleAddVideo(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" id="vTitle" required placeholder="Project Title" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500">
+                            <select id="vCategory" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500">
+                                <option value="Commercial">Commercial</option>
+                                <option value="Music Video">Music Video</option>
+                                <option value="Short Film">Short Film</option>
+                            </select>
+                            <input type="url" id="vEmbed" required placeholder="Video URL (YouTube/Vimeo Embed)" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500 col-span-1 sm:col-span-2">
+                            <input type="url" id="vThumb" required placeholder="Thumbnail Image URL" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500 col-span-1 sm:col-span-2">
+                            <input type="text" id="vClient" required placeholder="Client Name" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500">
+                            <input type="text" id="vYear" required placeholder="Year (e.g. 2026)" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500">
+                            <button type="submit" class="col-span-1 sm:col-span-2 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all">
+                                Publish Video
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Add New Poster Form -->
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-blue-400 flex items-center gap-2">
+                            <i class="fa-solid fa-image"></i> Add Poster / Visual Art
+                        </h4>
+                        <form onsubmit="handleAddPoster(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" id="pTitle" required placeholder="Poster Title" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500">
+                            <input type="text" id="pCategory" required placeholder="Category (e.g. Cinema / Poster)" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500">
+                            <input type="url" id="pUrl" required placeholder="Poster Image URL" class="px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white focus:outline-none focus:border-blue-500 col-span-1 sm:col-span-2">
+                            <button type="submit" class="col-span-1 sm:col-span-2 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all">
+                                Publish Poster
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Manage Items List -->
+                    <div class="space-y-4">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-gray-300">Live Items List</h4>
+                        <div id="adminItemsList" class="space-y-3">
+                            <!-- Items list loaded dynamically -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tab 2: Branding & Styles -->
+                <div id="adminTabBranding" class="admin-tab-pane hidden p-6 overflow-y-auto space-y-6 flex-grow">
+                    
+                    <!-- Logo Customizer -->
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-blue-400">Logo Branding</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Studio Logo Text</label>
+                                <input type="text" id="cfgLogoText" onchange="updateBrandingSettings()" class="w-full px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Custom Logo Image URL (Optional)</label>
+                                <input type="url" id="cfgLogoImg" onchange="updateBrandingSettings()" placeholder="https://..." class="w-full px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Color Pickers -->
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-blue-400">Color Palette Engine</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Primary Accent</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="color" id="cfgAccentColor" onchange="updateBrandingSettings()" class="w-10 h-10 bg-transparent cursor-pointer rounded-lg">
+                                    <span id="lblAccentColor" class="text-xs font-mono text-gray-300">#3b82f6</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Background Tone</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="color" id="cfgBgColor" onchange="updateBrandingSettings()" class="w-10 h-10 bg-transparent cursor-pointer rounded-lg">
+                                    <span id="lblBgColor" class="text-xs font-mono text-gray-300">#0A0A0C</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Font Family Switcher -->
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-blue-400">Typography Settings</h4>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">Heading Style</label>
+                            <select id="cfgHeadingFont" onchange="updateBrandingSettings()" class="w-full px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white">
+                                <option value="Syne">Syne (Cinematic Modern)</option>
+                                <option value="Inter">Inter (Clean Minimal)</option>
+                                <option value="Space Grotesk">Space Grotesk (Tech Future)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tab 3: Layout Toggles -->
+                <div id="adminTabLayout" class="admin-tab-pane hidden p-6 overflow-y-auto space-y-6 flex-grow">
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-blue-400">Section Visibility</h4>
+                        
+                        <div class="flex items-center justify-between py-2 border-b border-white/5">
+                            <div>
+                                <p class="text-xs font-bold text-white">Posters / Affiches Section</p>
+                                <p class="text-[10px] text-gray-400">Toggle display of visual poster grid</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="cfgShowPosters" onchange="updateLayoutSettings()" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+
+                        <div class="pt-2">
+                            <label class="block text-xs text-gray-400 mb-2">Video Grid Columns</label>
+                            <select id="cfgGridCols" onchange="updateLayoutSettings()" class="w-full px-3 py-2 text-xs rounded-lg bg-black border border-white/10 text-white">
+                                <option value="2">2 Columns Grid</option>
+                                <option value="3" selected>3 Columns Grid (Default)</option>
+                                <option value="4">4 Columns Grid</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Reset Data Button -->
+                    <div class="pt-6">
+                        <button onclick="resetDataToDefault()" class="w-full py-3 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 font-bold text-xs uppercase tracking-wider transition-all">
+                            Reset All Data to Default Demo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Admin Footer Actions -->
+                <div class="p-4 border-t border-white/10 bg-black/40 flex items-center justify-between">
+                    <span class="text-xs text-green-400 flex items-center gap-1.5 font-medium">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Dynamic Local Sync Active
+                    </span>
+                    <button onclick="toggleAdminModal()" class="px-4 py-2 rounded-lg bg-white/10 text-xs font-bold text-white hover:bg-white/20">
+                        Close Surface
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DEFAULT SITE DATA
+        // Portfolio content is intentionally empty until RC's real projects are added in Admin.
+        const defaultVideos = [];
+
+        const defaultPosters = [];
+
+        const defaultConfig = {
+            logoText: 'RC PROD ART',
+            logoImg: 'assets/rc-prod-art-logo.webp',
+            accentColor: '#e8b44f',
+            bgColor: '#0A0A0C',
+            headingFont: 'Syne',
+            showPosters: true,
+            gridCols: '3'
+        };
+
+        // LOCAL STORAGE INITIALIZATION
+        let storeVideos = JSON.parse(localStorage.getItem('rc_videos')) || defaultVideos;
+        let storePosters = JSON.parse(localStorage.getItem('rc_posters')) || defaultPosters;
+        // Remove the starter demo rows (including their non-RC client names and placeholder video links).
+        storeVideos = storeVideos.filter(v => !['v1', 'v2', 'v3'].includes(v.id));
+        storePosters = storePosters.filter(p => !['p1', 'p2', 'p3', 'p4'].includes(p.id));
+        localStorage.setItem('rc_videos', JSON.stringify(storeVideos));
+        localStorage.setItem('rc_posters', JSON.stringify(storePosters));
+        let storeConfig = JSON.parse(localStorage.getItem('rc_config')) || defaultConfig;
+        if (storeConfig.accentColor === '#3b82f6') storeConfig.accentColor = defaultConfig.accentColor;
+        localStorage.setItem('rc_config', JSON.stringify(storeConfig));
+
+        let activeFilter = 'all';
+
+        // INITIALIZATION ON PAGE LOAD
+        window.onload = function() {
+            applyBrandingAndStyles();
+            renderVideos();
+            renderPosters();
+            renderAdminItemsList();
+            populateAdminInputs();
+        };
+
+        // RENDER VIDEOS GRID
+        function renderVideos() {
+            const grid = document.getElementById('videoGrid');
+            document.getElementById('videoFilterContainer').classList.toggle('hidden', storeVideos.length === 0);
+            grid.innerHTML = '';
+
+            const filtered = activeFilter === 'all' 
+                ? storeVideos 
+                : storeVideos.filter(v => v.category === activeFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full border border-white/10 bg-white/[.02] px-6 py-10 text-center"><p class="text-xs uppercase tracking-[.18em] text-white/45">Le portfolio vidéo se construit</p><p class="mt-3 text-sm text-white/60">Contactez le studio pour parler de votre prochain projet.</p><a href="contact.html" class="inline-block mt-5 text-xs font-bold uppercase tracking-[.15em] text-brand-accent hover:text-white">Nous contacter →</a></div>`;
+                return;
+            }
+
+            filtered.forEach(v => {
+                const card = document.createElement('div');
+                card.className = "group relative rounded-2xl overflow-hidden glass-panel border border-white/10 hover:border-blue-500/50 transition-all duration-300 video-card-hover cursor-pointer";
+                card.onclick = () => openVideoModal(v);
+
+                card.innerHTML = `
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="${v.thumb}" alt="${v.title}" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="video-overlay absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                            <div class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl shadow-lg shadow-blue-600/50 transform scale-90 group-hover:scale-100 transition-transform">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </div>
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-wider border border-white/10">
+                            ${v.category}
+                        </span>
+                    </div>
+                    <div class="p-5 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold font-heading text-white group-hover:text-blue-400 transition-colors">${v.title}</h3>
+                            <p class="text-xs text-gray-400">${v.client}</p>
+                        </div>
+                        <span class="text-xs font-mono text-gray-500">${v.year}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // RENDER POSTERS GRID
+        function renderPosters() {
+            const grid = document.getElementById('posterGrid');
+            const section = document.getElementById('posters');
+            const navLink = document.getElementById('navPostersLink');
+
+            if (!storeConfig.showPosters) {
+                section.classList.add('hidden');
+                if (navLink) navLink.classList.add('hidden');
+                return;
+            } else {
+                section.classList.remove('hidden');
+                if (navLink) navLink.classList.remove('hidden');
+            }
+
+            grid.innerHTML = '';
+
+            if (storePosters.length === 0) {
+                grid.innerHTML = `<div class="col-span-full border border-white/10 bg-white/[.02] px-6 py-10 text-center"><p class="text-xs uppercase tracking-[.18em] text-white/45">Sélection photographique en préparation</p><p class="mt-3 text-sm text-white/60">Écrivez-nous pour découvrir les possibilités du studio.</p></div>`;
+                return;
+            }
+
+            storePosters.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer poster-card aspect-[3/4]";
+                card.onclick = () => openPosterModal(p);
+
+                card.innerHTML = `
+                    <img src="${p.url}" alt="${p.title}" class="w-full h-full object-cover transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400">${p.category}</span>
+                        <h4 class="text-sm font-bold font-heading text-white">${p.title}</h4>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // FILTER VIDEOS
+        function filterVideos(cat) {
+            activeFilter = cat;
+            document.querySelectorAll('.v-filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === cat) {
+                    btn.className = "v-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white transition-all";
+                } else {
+                    btn.className = "v-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all border border-white/10";
+                }
+            });
+            renderVideos();
+        }
+
+        // VIDEO MODAL HANDLERS
+        function openVideoModal(video) {
+            document.getElementById('modalIframe').src = video.embed + "?autoplay=1";
+            document.getElementById('modalTitle').innerText = video.title;
+            document.getElementById('modalMeta').innerText = `${video.category} • Client: ${video.client}`;
+            document.getElementById('modalYear').innerText = video.year;
+            document.getElementById('videoModal').classList.remove('hidden');
+        }
+
+        function closeVideoModal() {
+            document.getElementById('modalIframe').src = "";
+            document.getElementById('videoModal').classList.add('hidden');
+        }
+
+        // POSTER MODAL HANDLERS
+        function openPosterModal(poster) {
+            document.getElementById('posterModalImg').src = poster.url;
+            document.getElementById('posterModalTitle').innerText = poster.title;
+            document.getElementById('posterModal').classList.remove('hidden');
+        }
+
+        function closePosterModal() {
+            document.getElementById('posterModal').classList.add('hidden');
+        }
+
+        // MOBILE MENU
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobileDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        // CONTACT FORM SUBMISSION
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const form = e.currentTarget;
+            const fields = form.querySelectorAll('input, select, textarea');
+            const subject = `Demande de projet — ${fields[0].value}`;
+            const body = [
+                `Nom : ${fields[0].value}`,
+                `E-mail : ${fields[1].value}`,
+                `Type de projet : ${fields[2].value}`,
+                `Budget indicatif : ${fields[3].value || 'Non précisé'}`,
+                '',
+                'Détails du projet :',
+                fields[4].value
+            ].join('\n');
+            document.getElementById('contactNotice').classList.remove('hidden');
+            window.location.href = `mailto:rcprodartcontact@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // ADMIN AUTHENTICATION
+        function toggleAdminModal() {
+            document.getElementById('adminModal').classList.toggle('hidden');
+        }
+
+        function unlockAdmin() {
+            const pass = document.getElementById('adminPassInput').value;
+            const err = document.getElementById('adminAuthError');
+            if (pass === 'admin123') {
+                document.getElementById('adminAuthShield').classList.add('hidden');
+                document.getElementById('adminControls').classList.remove('hidden');
+                err.classList.add('hidden');
+            } else {
+                err.classList.remove('hidden');
+            }
+        }
+
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('border-b-2', 'border-blue-500', 'text-white'));
+            document.querySelectorAll('.admin-tab-pane').forEach(pane => pane.classList.add('hidden'));
+
+            if (tab === 'content') {
+                document.getElementById('adminTabContent').classList.remove('hidden');
+            } else if (tab === 'branding') {
+                document.getElementById('adminTabBranding').classList.remove('hidden');
+            } else if (tab === 'layout') {
+                document.getElementById('adminTabLayout').classList.remove('hidden');
+            }
+        }
+
+        // BRANDING & STYLES ENGINE
+        function applyBrandingAndStyles() {
+            // Apply CSS Variables
+            document.documentElement.style.setProperty('--color-accent', storeConfig.accentColor);
+            document.documentElement.style.setProperty('--color-accent-glow', storeConfig.accentColor + '55');
+            document.documentElement.style.setProperty('--color-bg', storeConfig.bgColor);
+            document.documentElement.style.setProperty('--font-heading', storeConfig.headingFont);
+
+            // Apply Video Grid Columns
+            const vGrid = document.getElementById('videoGrid');
+            vGrid.className = `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${storeConfig.gridCols} gap-8`;
+        }
+
+        function populateAdminInputs() {
+            document.getElementById('cfgLogoText').value = storeConfig.logoText;
+            document.getElementById('cfgLogoImg').value = storeConfig.logoImg;
+            document.getElementById('cfgAccentColor').value = storeConfig.accentColor;
+            document.getElementById('lblAccentColor').innerText = storeConfig.accentColor;
+            document.getElementById('cfgBgColor').value = storeConfig.bgColor;
+            document.getElementById('lblBgColor').innerText = storeConfig.bgColor;
+            document.getElementById('cfgHeadingFont').value = storeConfig.headingFont;
+            document.getElementById('cfgShowPosters').checked = storeConfig.showPosters;
+            document.getElementById('cfgGridCols').value = storeConfig.gridCols;
+        }
+
+        function updateBrandingSettings() {
+            storeConfig.logoText = document.getElementById('cfgLogoText').value || 'RC PROD ART';
+            storeConfig.logoImg = document.getElementById('cfgLogoImg').value;
+            storeConfig.accentColor = document.getElementById('cfgAccentColor').value;
+            storeConfig.bgColor = document.getElementById('cfgBgColor').value;
+            storeConfig.headingFont = document.getElementById('cfgHeadingFont').value;
+
+            document.getElementById('lblAccentColor').innerText = storeConfig.accentColor;
+            document.getElementById('lblBgColor').innerText = storeConfig.bgColor;
+
+            localStorage.setItem('rc_config', JSON.stringify(storeConfig));
+            applyBrandingAndStyles();
+        }
+
+        function updateLayoutSettings() {
+            storeConfig.showPosters = document.getElementById('cfgShowPosters').checked;
+            storeConfig.gridCols = document.getElementById('cfgGridCols').value;
+
+            localStorage.setItem('rc_config', JSON.stringify(storeConfig));
+            applyBrandingAndStyles();
+            renderPosters();
+        }
+
+        // CONTENT CRUD OPERATIONS
+        function handleAddVideo(e) {
+            e.preventDefault();
+            const newVid = {
+                id: 'v_' + Date.now(),
+                title: document.getElementById('vTitle').value,
+                category: document.getElementById('vCategory').value,
+                embed: document.getElementById('vEmbed').value,
+                thumb: document.getElementById('vThumb').value,
+                client: document.getElementById('vClient').value,
+                year: document.getElementById('vYear').value
+            };
+
+            storeVideos.unshift(newVid);
+            localStorage.setItem('rc_videos', JSON.stringify(storeVideos));
+            renderVideos();
+            renderAdminItemsList();
+            e.target.reset();
+        }
+
+        function handleAddPoster(e) {
+            e.preventDefault();
+            const newPoster = {
+                id: 'p_' + Date.now(),
+                title: document.getElementById('pTitle').value,
+                category: document.getElementById('pCategory').value,
+                url: document.getElementById('pUrl').value
+            };
+
+            storePosters.unshift(newPoster);
+            localStorage.setItem('rc_posters', JSON.stringify(storePosters));
+            renderPosters();
+            renderAdminItemsList();
+            e.target.reset();
+        }
+
+        function deleteVideo(id) {
+            storeVideos = storeVideos.filter(v => v.id !== id);
+            localStorage.setItem('rc_videos', JSON.stringify(storeVideos));
+            renderVideos();
+            renderAdminItemsList();
+        }
+
+        function deletePoster(id) {
+            storePosters = storePosters.filter(p => p.id !== id);
+            localStorage.setItem('rc_posters', JSON.stringify(storePosters));
+            renderPosters();
+            renderAdminItemsList();
+        }
+
+        function renderAdminItemsList() {
+            const container = document.getElementById('adminItemsList');
+            container.innerHTML = '';
+
+            storeVideos.forEach(v => {
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-3 rounded-xl bg-black/40 border border-white/5 text-xs";
+                row.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-video text-blue-400"></i>
+                        <div>
+                            <p class="font-bold text-white">${v.title}</p>
+                            <p class="text-[10px] text-gray-400">${v.category} • ${v.year}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteVideo('${v.id}')" class="p-2 text-red-400 hover:text-red-300">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(row);
+            });
+
+            storePosters.forEach(p => {
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-3 rounded-xl bg-black/40 border border-white/5 text-xs";
+                row.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-image text-purple-400"></i>
+                        <div>
+                            <p class="font-bold text-white">${p.title}</p>
+                            <p class="text-[10px] text-gray-400">${p.category}</p>
+                        </div>
+                    </div>
+                    <button onclick="deletePoster('${p.id}')" class="p-2 text-red-400 hover:text-red-300">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function resetDataToDefault() {
+            if (confirm("Reset all custom settings, videos, and posters to initial demo data?")) {
+                localStorage.removeItem('rc_videos');
+                localStorage.removeItem('rc_posters');
+                localStorage.removeItem('rc_config');
+                storeVideos = defaultVideos;
+                storePosters = defaultPosters;
+                storeConfig = defaultConfig;
+                applyBrandingAndStyles();
+                renderVideos();
+                renderPosters();
+                renderAdminItemsList();
+                populateAdminInputs();
+            }
+        }
+    </script>
+</body>
+</html>

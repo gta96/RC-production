@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nos Réalisations - RC Prod Art</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Montserrat & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            fxYellow: '#FFC700',
+            fxDark: '#0B0B0C',
+            fxCard: '#141416',
+            fxBorder: '#26262A'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0B0B0C;
+      color: #E4E4E7;
+      font-family: 'Inter', sans-serif;
+    }
+    .yellow-glow {
+      box-shadow: 0 0 25px rgba(255, 199, 0, 0.25);
+    }
+    .video-overlay {
+      background: linear-gradient(180deg, rgba(11,11,12,0) 0%, rgba(11,11,12,0.95) 100%);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-fxYellow selection:text-black">
+
+  <!-- NAVIGATION HEADER -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-fxDark/90 backdrop-blur-md border-b border-fxBorder/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <div class="nav-logo shrink-0">
+        <a href="index.html">
+          <img src="logo.png" alt="RC Prod Art Logo" class="w-20 h-20 object-contain">
+        </a>
+      </div>
+
+      <!-- Desktop Nav Bar -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="index.html" class="hover:text-fxYellow transition-colors">Accueil</a>
+        <a href="realisation.html" class="text-fxYellow font-bold border-b-2 border-fxYellow">Réalisations</a>
+        <a href="portfolio.html" class="hover:text-fxYellow transition-colors">Portfolio</a>
+        <a href="packages.html" class="hover:text-fxYellow transition-colors">Packages</a>
+        <a href="studio.html" class="hover:text-fxYellow transition-colors">Studio</a>
+        <a href="rc-lab.html" class="hover:text-fxYellow transition-colors">RC LAB</a>
+        <a href="contact.html" class="hover:text-fxYellow transition-colors">Contact</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="md:hidden text-white text-2xl focus:outline-none">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Nav -->
+    <div id="mobileMenu" class="hidden md:hidden bg-fxCard border-b border-fxBorder px-6 py-4 flex flex-col gap-4">
+      <a href="index.html" class="hover:text-fxYellow transition-colors">Accueil</a>
+      <a href="realisation.html" class="text-fxYellow font-bold border-b-2 border-fxYellow">Réalisations</a>
+      <a href="portfolio.html" class="hover:text-fxYellow transition-colors">Portfolio</a>
+      <a href="packages.html" class="hover:text-fxYellow transition-colors">Packages</a>
+      <a href="studio.html" class="hover:text-fxYellow transition-colors">Studio</a>
+      <a href="rc-lab.html" class="hover:text-fxYellow transition-colors">RC LAB</a>
+      <a href="contact.html" class="hover:text-fxYellow transition-colors">Contact</a>
+    </div>
+  </header>
+
+  <!-- MAIN HERO SECTION -->
+  <section class="pt-36 pb-16 relative overflow-hidden bg-gradient-to-b from-fxCard/50 to-fxDark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <span class="inline-block px-3 py-1 bg-fxYellow/10 border border-fxYellow/30 text-fxYellow text-xs font-bold uppercase tracking-widest rounded-full mb-4">
+        PORTFOLIO AUDIOVISUEL
+      </span>
+      <h1 class="font-heading font-black text-4xl sm:text-6xl text-white mb-6 uppercase tracking-tight">
+        Nos <span class="text-fxYellow">Réalisations</span>
+      </h1>
+      <p class="max-w-3xl mx-auto text-gray-400 text-base sm:text-lg leading-relaxed">
+        De la conceptualisation et de la rédaction au tournage, au montage et à la post-production, notre équipe passionnée s’assure que chaque projet soit une fusion parfaite entre créativité artistique et impact visuel.
+      </p>
+    </div>
+  </section>
+
+  <!-- CATEGORY FILTER BUTTONS -->
+  <section class="py-6 border-y border-fxBorder bg-fxDark/80 sticky top-20 z-40 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-2 sm:gap-4 flex-wrap text-sm font-semibold">
+      <button onclick="filterCategory('all')" class="filter-btn active px-5 py-2 rounded-full border border-fxYellow bg-fxYellow text-black transition-all">
+        Tous
+      </button>
+      <button onclick="filterCategory('spot')" class="filter-btn px-5 py-2 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        Spot Publicitaire
+      </button>
+      <button onclick="filterCategory('clip')" class="filter-btn px-5 py-2 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        Clips Vidéo
+      </button>
+      <button onclick="filterCategory('brand')" class="filter-btn px-5 py-2 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        Brand Content & Reels
+      </button>
+      <button onclick="filterCategory('documentaire')" class="filter-btn px-5 py-2 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        Documentaires
+      </button>
+    </div>
+  </section>
+
+  <!-- REALISATIONS GRID DISPLAY -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Video Card 1 -->
+        <div class="project-card spot bg-fxCard rounded-xl overflow-hidden border border-fxBorder hover:border-fxYellow/50 transition-all duration-300 group">
+          <div class="relative aspect-video overflow-hidden bg-black">
+            <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Spot TV" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="p-6">
+            <span class="text-xs font-bold text-fxYellow tracking-wider uppercase">Spot Publicitaire</span>
+            <h3 class="font-heading font-bold text-xl text-white mt-1 group-hover:text-fxYellow transition-colors">Campagne Prestige 2026</h3>
+            <p class="text-gray-400 text-sm mt-2">Conception, tournage cinéma et étalonnage haute précision pour marque internationale.</p>
+          </div>
+        </div>
+
+        <!-- Video Card 2 -->
+        <div class="project-card clip bg-fxCard rounded-xl overflow-hidden border border-fxBorder hover:border-fxYellow/50 transition-all duration-300 group">
+          <div class="relative aspect-video overflow-hidden bg-black">
+            <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Clip Musical" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="p-6">
+            <span class="text-xs font-bold text-fxYellow tracking-wider uppercase">Clip Vidéo</span>
+            <h3 class="font-heading font-bold text-xl text-white mt-1 group-hover:text-fxYellow transition-colors">Clip Musical - High Cinematic</h3>
+            <p class="text-gray-400 text-sm mt-2">Direction artistique complète, effets visuels VFX et scénario sur-mesure.</p>
+          </div>
+        </div>
+
+        <!-- Video Card 3 -->
+        <div class="project-card brand bg-fxCard rounded-xl overflow-hidden border border-fxBorder hover:border-fxYellow/50 transition-all duration-300 group">
+          <div class="relative aspect-video overflow-hidden bg-black">
+            <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Brand Content" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="p-6">
+            <span class="text-xs font-bold text-fxYellow tracking-wider uppercase">Brand Content</span>
+            <h3 class="font-heading font-bold text-xl text-white mt-1 group-hover:text-fxYellow transition-colors">Stratégie Réseaux Sociaux</h3>
+            <p class="text-gray-400 text-sm mt-2">Série de vidéos dynamiques pour maximiser l'engagement et l'image de marque.</p>
+          </div>
+        </div>
+
+        <!-- Video Card 4 -->
+        <div class="project-card documentaire bg-fxCard rounded-xl overflow-hidden border border-fxBorder hover:border-fxYellow/50 transition-all duration-300 group">
+          <div class="relative aspect-video overflow-hidden bg-black">
+            <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Documentaire" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="p-6">
+            <span class="text-xs font-bold text-fxYellow tracking-wider uppercase">Documentaire</span>
+            <h3 class="font-heading font-bold text-xl text-white mt-1 group-hover:text-fxYellow transition-colors">Reportage Institutionnel</h3>
+            <p class="text-gray-400 text-sm mt-2">Storytelling captivant et couverture vidéo complète pour évènement culturel.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT & FOOTER SECTION -->
+  <section id="contact" class="py-20 bg-fxCard border-t border-fxBorder relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        
+        <!-- Left Contact Info -->
+        <div>
+          <span class="text-fxYellow text-xs font-bold uppercase tracking-widest">Avez-vous un projet ?</span>
+          <h2 class="font-heading font-black text-3xl sm:text-5xl text-white mt-2 mb-6">
+            PARLONS DE VOTRE <br/><span class="text-fxYellow">PROCHAINE VIDÉO</span>
+          </h2>
+          <p class="text-gray-400 leading-relaxed mb-8">
+            Notre motivation c'est avant tout de comprendre vos besoins et vos objectifs pour ensuite les traduire en images d'exception.
+          </p>
+<div id="video-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10 max-w-7xl mx-auto px-4"></div>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-fxDark border border-fxBorder rounded-lg flex items-center justify-center text-fxYellow text-xl">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <div class="text-xs text-gray-500 uppercase font-semibold">Téléphone</div>
+                <div class="text-white font-bold">+216 24 090 366</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-fxDark border border-fxBorder rounded-lg flex items-center justify-center text-fxYellow text-xl">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <div class="text-xs text-gray-500 uppercase font-semibold">Email</div>
+                <div class="text-white font-bold">rcprodartcontact@gmail.com</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-fxDark border border-fxBorder rounded-lg flex items-center justify-center text-fxYellow text-xl">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <div class="text-xs text-gray-500 uppercase font-semibold">Adresse</div>
+                <div class="text-white font-bold">Mutuelle Ville, Tunis, Tunisie</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Networks Links -->
+          <div class="mt-8 pt-8 border-t border-fxBorder/60">
+            <div class="text-xs text-gray-500 uppercase font-semibold mb-4">Suivez-nous sur les réseaux</div>
+            <div class="flex items-center gap-3">
+              <a href="https://www.facebook.com/profile.php?id=61594969591297" target="_blank" class="w-10 h-10 bg-fxDark border border-fxBorder rounded flex items-center justify-center text-gray-300 hover:text-black hover:bg-fxYellow hover:border-fxYellow transition-all">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://www.linkedin.com" target="_blank" class="w-10 h-10 bg-fxDark border border-fxBorder rounded flex items-center justify-center text-gray-300 hover:text-black hover:bg-fxYellow hover:border-fxYellow transition-all">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="https://www.youtube.com" target="_blank" class="w-10 h-10 bg-fxDark border border-fxBorder rounded flex items-center justify-center text-gray-300 hover:text-black hover:bg-fxYellow hover:border-fxYellow transition-all">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+              <a href="https://www.behance.net" target="_blank" class="w-10 h-10 bg-fxDark border border-fxBorder rounded flex items-center justify-center text-gray-300 hover:text-black hover:bg-fxYellow hover:border-fxYellow transition-all">
+                <i class="fa-brands fa-behance"></i>
+              </a>
+              <a href="https://vimeo.com" target="_blank" class="w-10 h-10 bg-fxDark border border-fxBorder rounded flex items-center justify-center text-gray-300 hover:text-black hover:bg-fxYellow hover:border-fxYellow transition-all">
+                <i class="fa-brands fa-vimeo-v"></i>
+              </a>
+              <a href="https://www.instagram.com" target="_blank" class="w-10 h-10 bg-fxDark border border-fxBorder rounded flex items-center justify-center text-gray-300 hover:text-black hover:bg-fxYellow hover:border-fxYellow transition-all">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick Contact Form -->
+        <div class="bg-fxDark p-8 rounded-2xl border border-fxBorder">
+          <form class="space-y-4">
+            <div>
+              <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Nom complet</label>
+              <input type="text" placeholder="Votre nom" class="w-full bg-fxCard border border-fxBorder rounded p-3 text-white focus:outline-none focus:border-fxYellow transition-colors" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Email</label>
+              <input type="email" placeholder="votre@email.com" class="w-full bg-fxCard border border-fxBorder rounded p-3 text-white focus:outline-none focus:border-fxYellow transition-colors" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Message</label>
+              <textarea rows="4" placeholder="Décrivez votre projet..." class="w-full bg-fxCard border border-fxBorder rounded p-3 text-white focus:outline-none focus:border-fxYellow transition-colors"></textarea>
+            </div>
+            <button type="button" class="w-full py-3.5 bg-fxYellow text-black font-extrabold rounded hover:bg-yellow-400 transition-all uppercase tracking-wider yellow-glow">
+              Envoyer le message
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- COPYRIGHT FOOTER -->
+      <div class="pt-8 border-t border-fxBorder/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <div>© 2026 RC Prod Art. All rights reserved.</div>
+        <div class="flex gap-6">
+          <a href="../index.html" class="hover:text-fxYellow transition-colors">Mentions Légales</a>
+          <a href="../index.html" class="hover:text-fxYellow transition-colors">Politique de confidentialité</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- JAVASCRIPT FOR CATEGORY FILTERING & MOBILE MENU -->
+  <script>
+    // Filter Functionality
+    function filterCategory(category) {
+      const cards = document.querySelectorAll('.project-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      // Toggle active buttons
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-fxYellow', 'text-black', 'border-fxYellow');
+        btn.classList.add('bg-fxCard', 'text-gray-300', 'border-fxBorder');
+      });
+      event.target.classList.add('bg-fxYellow', 'text-black', 'border-fxYellow');
+      event.target.classList.remove('bg-fxCard', 'text-gray-300', 'border-fxBorder');
+
+      // Show/Hide Cards
+      cards.forEach(card => {
+        if (category === 'all' || card.classList.contains(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+  <footer class="py-6 bg-fxDark border-t border-fxBorder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-gray-500">
+      <a href="tel:+21624090366" class="hover:text-fxYellow transition-colors">+216 24 090 366</a>
+      <a href="mailto:rcprodartcontact@gmail.com" class="hover:text-fxYellow transition-colors">rcprodartcontact@gmail.com</a>
+      <span>Mutuelle Ville, Tunis, Tunisie</span>
+      <a href="https://www.facebook.com/profile.php?id=61594969591297" target="_blank" rel="noopener noreferrer" class="hover:text-fxYellow transition-colors">Facebook</a>
+    </div>
+  </footer>
+<script>
+  function loadGalleryVideos() {
+    const gallery = document.getElementById("video-gallery");
+    if (!gallery) return;
+
+    const videos = JSON.parse(localStorage.getItem("rc_videos")) || [];
+    gallery.innerHTML = "";
+
+    if (videos.length === 0) {
+      gallery.innerHTML = "<p class='text-center text-gray-400 col-span-full py-10'>Prochainement nos projets...</p>";
+      return;
+    }
+
+    videos.forEach(video => {
+      gallery.innerHTML += `
+        <div class="bg-fxCard p-4 rounded-xl border border-fxBorder shadow-lg">
+          <h3 class="text-white font-bold text-lg mb-3">${video.title}</h3>
+          <div class="relative overflow-hidden rounded-lg aspect-video">
+            <iframe class="w-full h-full" src="${video.url}" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', loadGalleryVideos);
+</script>
+</body></html>

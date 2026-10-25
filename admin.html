@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC Prod Art - Panneau d'Administration</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ffb703;
+            --secondary-color: #fb8500;
+            --bg-dark: #0f0f11;
+            --card-bg: #1a1a1e;
+            --text-light: #f1f1f1;
+            --text-muted: #a0a0a0;
+            --border-color: #2a2a30;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Login Screen */
+        #login-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .login-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #121214;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #000;
+            font-weight: bold;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Dashboard Header */
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Main Layout */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            padding: 30px 40px;
+            flex: 1;
+        }
+
+        .panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 25px;
+            height: fit-content;
+        }
+
+        .panel h3 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Project Cards Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-item {
+            background: #121214;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-preview {
+            width: 100%;
+            height: 160px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-preview iframe, .project-preview video, .project-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 15px;
+        }
+
+        .project-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .project-category {
+            font-size: 0.75rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .delete-btn {
+            background: #e63946;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Color Controls */
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .color-picker-group input[type="color"] {
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: none;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ecran de connexion -->
+    <div id="login-overlay">
+        <div class="login-card">
+            <h2><i class="fa-solid fa-lock"></i> RC PROD ART ADMIN</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">Accès réservé au propriétaire du site</p>
+            <div class="input-group">
+                <label>Mot de passe</label>
+                <input type="password" id="admin-pass" placeholder="Entrez le mot de passe...">
+            </div>
+            <button class="btn" onclick="checkAuth()">Se connecter</button>
+            <p id="error-msg" style="color: #e63946; font-size: 0.85rem; margin-top: 15px; display: none;">Mot de passe incorrect !</p>
+        </div>
+    </div>
+
+    <!-- Header Dashboard -->
+    <header>
+        <div class="logo"><i class="fa-solid fa-clapperboard"></i> RC PROD ART - DASHBOARD</div>
+        <button class="btn" style="width: auto; padding: 8px 16px; font-size: 0.85rem;" onclick="logout()">Déconnexion</button>
+    </header>
+
+    <!-- Contenu Principal -->
+    <div class="dashboard-container">
+        
+        <!-- Colonne Gauche : Configuration & Ajout -->
+        <div>
+            <!-- Personnalisation du Style -->
+            <div class="panel" style="margin-bottom: 25px;">
+                <h3><i class="fa-solid fa-palette"></i> Style & Couleurs</h3>
+                <div class="color-picker-group">
+                    <label>Couleur Principale</label>
+                    <input type="color" id="primaryColorPicker" value="#ffb703" onchange="updateColors()">
+                </div>
+                <div class="color-picker-group">
+                    <label>Couleur Secondaire</label>
+                    <input type="color" id="secondaryColorPicker" value="#fb8500" onchange="updateColors()">
+                </div>
+            </div>
+
+            <!-- Formulaire d'Ajout de Projet -->
+            <div class="panel">
+                <h3><i class="fa-solid fa-plus"></i> Ajouter un Projet</h3>
+                <form id="add-project-form" onsubmit="addProject(event)">
+                    <div class="input-group">
+                        <label>Titre du projet</label>
+                        <input type="text" id="project-title" required placeholder="Ex: Clip Musique / Spot TV">
+                    </div>
+                    <div class="input-group">
+                        <label>Catégorie</label>
+                        <select id="project-category" required>
+                            <option value="pub">Spots TV & Pub</option>
+                            <option value="clips">Clips Vidéo</option>
+                            <option value="brand">Brand Content</option>
+                            <option value="event">Événementiel</option>
+                            <option value="vfx">VFX & 3D Animation</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Lien Vidéo (YouTube / Vimeo / MP4)</label>
+                        <input type="url" id="project-url" required placeholder="https://www.youtube.com/watch?v=...">
+                    </div>
+                    <button type="submit" class="btn">Publier le projet</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Colonne Droite : Liste des Projets -->
+        <div class="panel">
+            <h3><i class="fa-solid fa-film"></i> Projets actuellement sur le site (<span id="project-count">0</span>)</h3>
+            <div class="projects-grid" id="projects-container">
+                <!-- Les projets chargés apparaîtront ici -->
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Mot de passe par défaut pour accéder à l'administration
+        const ADMIN_PASS = "rcprod2026"; 
+
+        // Initialisation
+        document.addEventListener("DOMContentLoaded", () => {
+            if (sessionStorage.getItem("admin_authenticated") === "true") {
+                document.getElementById("login-overlay").style.display = "none";
+            }
+            loadColors();
+            renderProjects();
+        });
+
+        // Authentification
+        function checkAuth() {
+            const pass = document.getElementById("admin-pass").value;
+            if (pass === ADMIN_PASS) {
+                sessionStorage.setItem("admin_authenticated", "true");
+                document.getElementById("login-overlay").style.display = "none";
+            } else {
+                document.getElementById("error-msg").style.display = "block";
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem("admin_authenticated");
+            location.reload();
+        }
+
+        // Gestion des Couleurs
+        function updateColors() {
+            const primary = document.getElementById("primaryColorPicker").value;
+            const secondary = document.getElementById("secondaryColorPicker").value;
+            
+            const theme = { primary, secondary };
+            localStorage.setItem("rc_theme", JSON.stringify(theme));
+
+            document.documentElement.style.setProperty('--primary-color', primary);
+            document.documentElement.style.setProperty('--secondary-color', secondary);
+        }
+
+        function loadColors() {
+            const savedTheme = JSON.parse(localStorage.getItem("rc_theme"));
+            if (savedTheme) {
+                document.getElementById("primaryColorPicker").value = savedTheme.primary;
+                document.getElementById("secondaryColorPicker").value = savedTheme.secondary;
+                document.documentElement.style.setProperty('--primary-color', savedTheme.primary);
+                document.documentElement.style.setProperty('--secondary-color', savedTheme.secondary);
+            }
+        }
+
+        // Helper pour convertir un lien YouTube classique en Embed
+        function formatEmbedUrl(url) {
+            if (url.includes("youtube.com/watch?v=")) {
+                const videoId = url.split("v=")[1].split("&")[0];
+                return `https://www.youtube.com/embed/${videoId}`;
+            } else if (url.includes("youtu.be/")) {
+                const videoId = url.split("youtu.be/")[1].split("?")[0];
+                return `https://www.youtube.com/embed/${videoId}`;
+            }
+            return url;
+        }
+
+        // Ajouter un projet
+        function addProject(event) {
+            event.preventDefault();
+
+            const title = document.getElementById("project-title").value;
+            const category = document.getElementById("project-category").value;
+            const url = formatEmbedUrl(document.getElementById("project-url").value);
+
+            const projects = JSON.parse(localStorage.getItem("rc_projects")) || [];
+            const newProject = { id: Date.now(), title, category, url };
+
+            projects.push(newProject);
+            localStorage.setItem("rc_projects", JSON.stringify(projects));
+
+            document.getElementById("add-project-form").reset();
+            renderProjects();
+        }
+
+        // Supprimer un projet
+        function deleteProject(id) {
+            let projects = JSON.parse(localStorage.getItem("rc_projects")) || [];
+            projects = projects.filter(p => p.id !== id);
+            localStorage.setItem("rc_projects", JSON.stringify(projects));
+            renderProjects();
+        }
+
+        // Afficher la liste des projets
+        function renderProjects() {
+            const projects = JSON.parse(localStorage.getItem("rc_projects")) || [];
+            const container = document.getElementById("projects-container");
+            document.getElementById("project-count").textContent = projects.length;
+
+            container.innerHTML = "";
+
+            if (projects.length === 0) {
+                container.innerHTML = "<p style='color: var(--text-muted); grid-column: 1/-1;'>Aucun projet ajouté pour le moment.</p>";
+                return;
+            }
+
+            projects.forEach(project => {
+                const card = document.createElement("div");
+                card.className = "project-item";
+                card.innerHTML = `
+                    <div class="project-preview">
+                        <iframe src="${project.url}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">${project.category}</span>
+                        <h4>${project.title}</h4>
+                        <button class="delete-btn" onclick="deleteProject(${project.id})"><i class="fa-solid fa-trash"></i> Supprimer</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
