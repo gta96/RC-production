@@ -240,7 +240,7 @@
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">Accès réservé au propriétaire du site</p>
             <div class="input-group">
                 <label>Mot de passe</label>
-                <input type="password" id="admin-pass" placeholder="Entrez le mot de passe...">
+<input type="password" id="admin-pass" placeholder="Entrez le mot de passe..." onkeydown="if(event.key === 'Enter') checkAuth();">
             </div>
             <button class="btn" onclick="checkAuth()">Se connecter</button>
             <p id="error-msg" style="color: #e63946; font-size: 0.85rem; margin-top: 15px; display: none;">Mot de passe incorrect !</p>
@@ -337,6 +337,20 @@
             location.reload();
         }
 
+        document.addEventListener("DOMContentLoaded", function() {
+    const passwordInput = document.getElementById("admin-password") || document.querySelector("input[type='password']");
+    if (passwordInput) {
+        passwordInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                // حط هنا اسم دالة تسجيل الدخول عندك، مثلاً checkPassword() أو login()
+                if (typeof checkPassword === 'function') {
+                    checkPassword();
+                }
+            }
+        });
+    }
+});
         // Gestion des Couleurs
         function updateColors() {
             const primary = document.getElementById("primaryColorPicker").value;
@@ -396,7 +410,40 @@
             localStorage.setItem("rc_projects", JSON.stringify(projects));
             renderProjects();
         }
+// إضافة مشروع جديد
+function addProject(event) {
+    event.preventDefault();
+const title = document.getElementById("project-title").value;
+    const category = document.getElementById("project-category").value;
+    const url = document.getElementById("project-url").value;
 
+    const newProject = {
+        id: Date.now(),
+        title: title,
+        category: category,
+        url: url
+    };
+
+    // 1. الحفظ محلياً في LocalStorage
+    let projects = JSON.parse(localStorage.getItem("rc_projects")) || [];
+    projects.push(newProject);
+    localStorage.setItem("rc_projects", JSON.stringify(projects));
+
+    // 2. إرسال البيانات لـ n8n Webhook المحلي
+    fetch('http://localhost:5678/webhook/rc-prod-art', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProject)
+    })
+    .then(response => console.log("تم الإرسال لـ n8n بنجاح"))
+    .catch(error => console.log("n8n غير متصل، تم الحفظ محلياً"));
+
+    // إعادة ضبط الفورمولير وتحديث العرض
+    document.getElementById("add-project-form").reset();
+    renderProjects();
+    
+    alert("تم نشر المشروع بنجاح!");
+}
         // Afficher la liste des projets
         function renderProjects() {
             const projects = JSON.parse(localStorage.getItem("rc_projects")) || [];
@@ -427,5 +474,3 @@
             });
         }
     </script>
-</body>
-</html>
