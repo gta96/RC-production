@@ -1,143 +1,163 @@
 <!DOCTYPE html>
-<html lang="fr" class="dark">
+<html lang="fr" class="dark scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Audiovisuel | RC Prod Art</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0B0B0C',
-                        cardBg: '#121214',
-                        goldAccent: '#FFC700',
-                    }
-                }
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Audiovisuel - RC Prod Art</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Montserrat & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            fxYellow: '#FFC700',
+            fxDark: '#0B0B0C',
+            fxCard: '#141416',
+            fxBorder: '#26262A'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          }
         }
-    </script>
-    <style>
-        body {
-            background-color: #0B0B0C;
-            color: #E5E7EB;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-        .gold-glow:hover {
-            box-shadow: 0 0 35px rgba(255, 199, 0, 0.15);
-            border-color: #FFC700;
-        }
-    </style>
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0B0B0C;
+      color: #E4E4E7;
+      font-family: 'Inter', sans-serif;
+    }
+    .yellow-glow {
+      box-shadow: 0 0 25px rgba(255, 199, 0, 0.25);
+    }
+    .yellow-glow-sm {
+      box-shadow: 0 0 15px rgba(255, 199, 0, 0.15);
+    }
+    .play-btn-glow {
+      box-shadow: 0 0 30px rgba(255, 199, 0, 0.4);
+    }
+  </style>
 </head>
-<body class="bg-darkBg min-h-screen flex flex-col justify-between selection:bg-goldAccent selection:text-black">
+<body class="antialiased selection:bg-fxYellow selection:text-black">
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="w-full border-b border-neutral-800/80 bg-darkBg/90 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full border border-goldAccent/40 flex items-center justify-center bg-black group-hover:border-goldAccent transition-colors">
-                    <span class="text-goldAccent text-lg font-bold">RC</span>
-                </div>
-                <span class="text-white font-bold tracking-widest text-lg uppercase">RC Prod Art</span>
-            </a>
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="index.html" class="text-neutral-400 hover:text-goldAccent transition-colors">Accueil</a>
-                <a href="realisation.html" class="text-neutral-400 hover:text-goldAccent transition-colors">Réalisations</a>
-                <a href="portfolio.html" class="text-goldAccent transition-colors">Portfolio</a>
-                <a href="index.html#contact" class="text-neutral-400 hover:text-goldAccent transition-colors">Contact</a>
-            </nav>
+  <!-- NAVIGATION HEADER -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-fxDark/90 backdrop-blur-md border-b border-fxBorder/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <div class="nav-logo shrink-0">
+        <a href="index.html">
+          <img src="logo.png" alt="RC Prod Art Logo" class="w-20 h-20 object-contain">
+        </a>
+      </div>
+
+      <!-- Desktop Nav Bar -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="index.html" class="hover:text-fxYellow transition-colors">Accueil</a>
+        <a href="realisation.html" class="hover:text-fxYellow transition-colors">Réalisations</a>
+        <a href="portfolio.html" class="text-fxYellow font-bold border-b-2 border-fxYellow">Portfolio</a>
+        <a href="packages.html" class="hover:text-fxYellow transition-colors">Packages</a>
+        <a href="studio.html" class="hover:text-fxYellow transition-colors">Studio</a>
+        <a href="rc-lab.html" class="hover:text-fxYellow transition-colors">RC LAB</a>
+        <a href="contact.html" class="hover:text-fxYellow transition-colors">Contact</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="md:hidden text-white text-2xl focus:outline-none">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Nav -->
+    <div id="mobileMenu" class="hidden md:hidden bg-fxCard border-b border-fxBorder px-6 py-4 flex flex-col gap-4">
+      <a href="index.html" class="hover:text-fxYellow transition-colors">Accueil</a>
+      <a href="realisation.html" class="hover:text-fxYellow transition-colors">Réalisations</a>
+      <a href="portfolio.html" class="text-fxYellow font-bold border-b-2 border-fxYellow">Portfolio</a>
+      <a href="packages.html" class="hover:text-fxYellow transition-colors">Packages</a>
+      <a href="studio.html" class="hover:text-fxYellow transition-colors">Studio</a>
+      <a href="rc-lab.html" class="hover:text-fxYellow transition-colors">RC LAB</a>
+      <a href="contact.html" class="hover:text-fxYellow transition-colors">Contact</a>
+    </div>
+  </header>
+
+  <!-- PORTFOLIO HERO BANNER -->
+  <section class="pt-36 pb-16 relative overflow-hidden bg-gradient-to-b from-fxCard/60 via-fxDark to-fxDark border-b border-fxBorder/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <span class="inline-block px-4 py-1.5 bg-fxYellow/10 border border-fxYellow/30 text-fxYellow text-xs font-bold uppercase tracking-widest rounded-full mb-4">
+        SHOWCASE AUDIOVISUEL & CINÉMA
+      </span>
+      <h1 class="font-heading font-black text-4xl sm:text-6xl text-white mb-6 uppercase tracking-tight">
+        PORTFOLIO <span class="text-fxYellow">CREATIVE RC</span>
+      </h1>
+      <p class="max-w-3xl mx-auto text-gray-400 text-base sm:text-lg leading-relaxed">
+        Découvrez l'ensemble de nos créations visuelles, spots publicitaires, clips musicaux et contenus de marque réalisés avec une exigence technique et artistique d'excellence.
+      </p>
+    </div>
+  </section>
+
+  <!-- CATEGORY FILTER TABS -->
+  <section class="py-6 border-b border-fxBorder bg-fxDark/90 sticky top-20 z-40 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-2 sm:gap-3 flex-wrap text-xs sm:text-sm font-semibold">
+      <button onclick="filterPortfolio('all')" class="port-filter-btn active px-6 py-2.5 rounded-full border border-fxYellow bg-fxYellow text-black font-bold transition-all">
+        Tous les Projets
+      </button>
+      <button onclick="filterPortfolio('pub')" class="port-filter-btn px-6 py-2.5 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        Spots TV & Pub
+      </button>
+      <button onclick="filterPortfolio('clip')" class="port-filter-btn px-6 py-2.5 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        Clips Vidéo
+      </button>
+      <button onclick="filterPortfolio('brand')" class="port-filter-btn px-6 py-2.5 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        Brand Content
+      </button>
+      <button onclick="filterPortfolio('event')" class="port-filter-btn px-6 py-2.5 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        Événementiel
+      </button>
+      <button onclick="filterPortfolio('vfx')" class="port-filter-btn px-6 py-2.5 rounded-full border border-fxBorder bg-fxCard text-gray-300 hover:border-fxYellow hover:text-fxYellow transition-all">
+        VFX & 3D Animation
+      </button>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO GRID -->
+  <section class="py-16 bg-fxDark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div id="portfolioGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Project Item 1 -->
+        <div class="portfolio-card pub bg-fxCard rounded-xl overflow-hidden border border-fxBorder hover:border-fxYellow/60 transition-all duration-300 group shadow-lg">
+          <div class="relative aspect-video overflow-hidden bg-black cursor-pointer" onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+            <img alt="Projet audiovisuel" class="w-full h-full object-cover">
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <!-- MAIN CONTENT - PORTFOLIO -->
-    <main class="max-w-7xl mx-auto px-6 pt-20 pb-16 flex-grow w-full">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-goldAccent/30 bg-goldAccent/5 text-goldAccent text-xs tracking-widest uppercase mb-4 font-mono">
-                <span>GALERIE & SHOWREEL</span>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight uppercase mb-4">
-                PORTFOLIO <span class="text-goldAccent">CRÉATIF</span>
-            </h1>
-            <p class="text-neutral-400 text-sm md:text-base leading-relaxed">
-                Plongez dans l'univers visuel et technique de nos productions cinématographiques, effets visuels et créations logicielles.
-            </p>
-        </div>
+  <footer class="py-6 bg-fxDark border-t border-fxBorder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-gray-500">
+      <a href="tel:+21624090366" class="hover:text-fxYellow transition-colors">+216 24 090 366</a>
+      <a href="mailto:rcprodartcontact@gmail.com" class="hover:text-fxYellow transition-colors">rcprodartcontact@gmail.com</a>
+      <span>Mutuelle Ville, Tunis, Tunisie</span>
+      <a href="https://www.facebook.com/profile.php?id=61594969591297" target="_blank" rel="noopener noreferrer" class="hover:text-fxYellow transition-colors">Facebook</a>
+    </div>
+  </footer>
 
-        <!-- BENTO GRID SHOWCASE -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- Item 1: VFX Showreel -->
-            <div class="bg-cardBg border border-neutral-800 rounded-2xl p-8 gold-glow transition-all duration-300 flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-black border border-goldAccent/30 flex items-center justify-center text-xl mb-6 group-hover:border-goldAccent">
-                        🎥
-                    </div>
-                    <span class="text-goldAccent text-xs font-mono uppercase tracking-wider">Showreel VFX</span>
-                    <h3 class="text-xl font-bold text-white mt-2 mb-3">Compositing & Effets Visuels</h3>
-                    <p class="text-neutral-400 text-xs md:text-sm leading-relaxed">
-                        Démonstration technique des pipelines VFX, intégration 3D et retouches d'images haut de gamme.
-                    </p>
-                </div>
-                <div class="mt-8 pt-4 border-t border-neutral-800/80 flex items-center justify-between text-xs font-mono text-neutral-400">
-                    <span>[ CINEMA GRADE ]</span>
-                    <span class="text-goldAccent group-hover:translate-x-1 transition-transform">Voir →</span>
-                </div>
-            </div>
-
-            <!-- Item 2: SFX Mastering -->
-            <div class="bg-cardBg border border-neutral-800 rounded-2xl p-8 gold-glow transition-all duration-300 flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-black border border-goldAccent/30 flex items-center justify-center text-xl mb-6 group-hover:border-goldAccent">
-                        🔊
-                    </div>
-                    <span class="text-goldAccent text-xs font-mono uppercase tracking-wider">Sound Design</span>
-                    <h3 class="text-xl font-bold text-white mt-2 mb-3">Mixage & Mastering Audio</h3>
-                    <p class="text-neutral-400 text-xs md:text-sm leading-relaxed">
-                        Habillage sonore immersif et traitement acoustique sur-mesure pour donner de la profondeur à chaque scène.
-                    </p>
-                </div>
-                <div class="mt-8 pt-4 border-t border-neutral-800/80 flex items-center justify-between text-xs font-mono text-neutral-400">
-                    <span>[ AUDIO LAB ]</span>
-                    <span class="text-goldAccent group-hover:translate-x-1 transition-transform">Écouter →</span>
-                </div>
-            </div>
-
-            <!-- Item 3: Web & Software -->
-            <div class="bg-cardBg border border-neutral-800 rounded-2xl p-8 gold-glow transition-all duration-300 flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-black border border-goldAccent/30 flex items-center justify-center text-xl mb-6 group-hover:border-goldAccent">
-                        💻
-                    </div>
-                    <span class="text-goldAccent text-xs font-mono uppercase tracking-wider">Engineering</span>
-                    <h3 class="text-xl font-bold text-white mt-2 mb-3">Applications Web & UI/UX</h3>
-                    <p class="text-neutral-400 text-xs md:text-sm leading-relaxed">
-                        Conception d'interfaces réactives, plateformes e-commerce et solutions logicielles épurées en dark mode.
-                    </p>
-                </div>
-                <div class="mt-8 pt-4 border-t border-neutral-800/80 flex items-center justify-between text-xs font-mono text-neutral-400">
-                    <span>[ CLEAN CODE ]</span>
-                    <span class="text-goldAccent group-hover:translate-x-1 transition-transform">Explorer →</span>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="w-full border-t border-neutral-800 bg-black py-12 mt-24">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-            <div>
-                <span class="text-white font-bold tracking-widest uppercase text-sm">RC Prod Art Studio</span>
-                <p class="text-neutral-500 text-xs mt-1">Tunis, Tunisie • Professional Audiovisual & Web Solutions</p>
-            </div>
-            <div class="text-xs text-neutral-500">
-                <p>© 2026 RC Prod Art. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
-
+  <script>
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  </script>
 </body>
 </html>
